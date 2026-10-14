@@ -1,0 +1,310 @@
+<Project>
+  Title = "Flexmirt Template - Vertical Linking Study"; 
+  Description = "Template for concurrent calibration of Simulation Data Sets for True Q-Matrix"; 
+
+<Options>
+  Mode = Calibration; 
+  MaxE = 20000; 
+  MaxM = 5; 
+  Etol = 1e-6; 
+  Mtol = 1e-9;  
+  Processors = 10;
+GOF = Extended;  
+  SavePrm = Yes;
+  SaveCOV = Yes; 
+  SavePRM = Yes;
+  SaveSCO = Yes;
+  Score = EAP;
+  DMtable = Yes;
+
+<Groups>
+  // define your groups and group names
+  %G3%
+  File = "\\Mac\Home\Library\CloudStorage\GoogleDrive-st4yk@virginia.edu\My Drive\VS_CDM\simlcdm_out\C001\rep_001\responses_G3.csv"; // File path for each of the data sets - '/Users/stephentavares/Library/CloudStorage/GoogleDrive-st4yk@virginia.edu/My Drive/VS_CDM/simlcdm_out/C009/rep_010/responses_G3.csv' - Change the condition, repitition, and grade .csv
+  
+  Varnames = I1, I2, I3, I4, I5, I6, I7, I8, I9, I10, 
+       I11, I12, I13, I14, I15, I16, I17, I18, I19, I20, 
+       I21, I22, I23, I24, I25, I26, I27, I28, I29, I30; 
+  
+  Select = I1, I2, I3, I4, I5, I6, I7, I8, I9, I10, 
+       I11, I12, I13, I14, I15, I16, I17, I18, I19, I20, 
+       I21, I22, I23, I24, I25, I26, I27, I28, I29, I30;
+  
+  Missing = -99;
+  N = 500; // pull from rep_manifest.csv this needs to be adjusted for each repitition
+  Ncats(_ALL_) = 2; 
+  Model(_ALL_) = Graded(2); 
+  Attributes = 4;
+  InteractionEffects = 2;
+  Dimensions = 10;
+  
+  %G4%
+  File = "\\Mac\Home\Library\CloudStorage\GoogleDrive-st4yk@virginia.edu\My Drive\VS_CDM\simlcdm_out\C001\rep_001\responses_G4.csv"; // File path for each of the data sets - '/Users/stephentavares/Library/CloudStorage/GoogleDrive-st4yk@virginia.edu/My Drive/VS_CDM/simlcdm_out/C009/rep_010/responses_G4.csv' - Change the condition, repitition, and grade .csv
+
+  Varnames = I1, I2, I3, I4, I5, I6, I7, I8, I9, I10, 
+       I11, I12, I13, I14, I15, I16, I17, I18, I19, I20, 
+       I21, I22, I23, I24, I25, I26, I27, I28, I29, I30; 
+  
+  Select = I1, I2, I3, I4, I5, I6, I7, I8, I9, I10, 
+       I11, I12, I13, I14, I15, I16, I17, I18, I19, I20, 
+       I21, I22, I23, I24, I25, I26, I27, I28, I29, I30;
+  
+  Missing = -99;
+  N = 500; // pull from rep_manifest.csv this needs to be adjusted for each repitition
+  Ncats(_ALL_) = 2; 
+  Model(_ALL_) = Graded(2); 
+  Attributes = 4;
+  InteractionEffects = 2;
+  Dimensions = 10; // 4 main + 6 2nd-order
+  
+  %G5%
+  File = "\\Mac\Home\Library\CloudStorage\GoogleDrive-st4yk@virginia.edu\My Drive\VS_CDM\simlcdm_out\C001\rep_001\responses_G5.csv"; // File path for each of the data sets - '/Users/stephentavares/Library/CloudStorage/GoogleDrive-st4yk@virginia.edu/My Drive/VS_CDM/simlcdm_out/C009/rep_010/responses_G5.csv' - Change the condition, repitition, and grade .csv
+
+  Varnames = I1, I2, I3, I4, I5, I6, I7, I8, I9, I10, 
+       I11, I12, I13, I14, I15, I16, I17, I18, I19, I20, 
+       I21, I22, I23, I24, I25, I26, I27, I28, I29, I30; 
+  
+  Select = I1, I2, I3, I4, I5, I6, I7, I8, I9, I10, 
+       I11, I12, I13, I14, I15, I16, I17, I18, I19, I20, 
+       I21, I22, I23, I24, I25, I26, I27, I28, I29, I30;
+  
+  Missing = -99;
+  N = 500; // pull from rep_manifest.csv this needs to be adjusted for each repitition
+  Ncats(_ALL_) = 2; 
+  Model(_ALL_) = Graded(2); 
+  Attributes = 4;
+  InteractionEffects = 2;
+  Dimensions = 10; 
+
+
+<Constraints> 
+  
+  // Main effects for G3
+  Fix G3,(I1, I2, I3, I4, I5, I6, I7, I8, I9, I10, 
+    I11, I12, I13, I14, I15, I16, I17, I18, I19, I20, 
+    I21, I22, I23, I24, I25, I26, I27, I28, I29, I30),
+  MainEffect; 
+  
+  Free G3,(I1), MainEffect(1);
+  Free G3,(I2), MainEffect(2);
+  Free G3,(I3), MainEffect(3);
+  Free G3,(I4), MainEffect(4);
+  Free G3,(I5), MainEffect(1);
+  Free G3,(I5), MainEffect(2);
+  Free G3,(I5), Interaction(1,2);
+  Free G3,(I6), MainEffect(1);
+  Free G3,(I6), MainEffect(3);
+  Free G3,(I6), Interaction(1,3);
+  Free G3,(I7), MainEffect(1);
+  Free G3,(I7), MainEffect(4);
+  Free G3,(I7), Interaction(1,4);
+  Free G3,(I8), MainEffect(2);
+  Free G3,(I8), MainEffect(4);
+  Free G3,(I8), Interaction(2,4);
+  Free G3,(I9), MainEffect(2);
+  Free G3,(I9), MainEffect(3);
+  Free G3,(I9), Interaction(2,3);
+  Free G3,(I10), MainEffect(3);
+  Free G3,(I10), MainEffect(4);
+  Free G3,(I10), Interaction(3,4);
+  Free G3,(I11), MainEffect(1);
+  Free G3,(I12), MainEffect(2);
+  Free G3,(I13), MainEffect(3);
+  Free G3,(I14), MainEffect(4);
+  Free G3,(I15), MainEffect(1);
+  Free G3,(I15), MainEffect(2);
+  Free G3,(I15), Interaction(1,2);  
+  Free G3,(I16), MainEffect(1);
+  Free G3,(I16), MainEffect(3);
+  Free G3,(I16), Interaction(1,3);
+  Free G3,(I17), MainEffect(1);
+  Free G3,(I17), MainEffect(4);
+  Free G3,(I17), Interaction(1,4);
+  Free G3,(I18), MainEffect(2);
+  Free G3,(I18), MainEffect(4);
+  Free G3,(I18), Interaction(2,4); 
+  Free G3,(I19), MainEffect(2);
+  Free G3,(I19), MainEffect(3);
+  Free G3,(I19), Interaction(2,3);
+  Free G3,(I20), MainEffect(3);
+  Free G3,(I20), MainEffect(4);
+  Free G3,(I20), Interaction(3,4);
+  Free G3,(I21), MainEffect(1);
+  Free G3,(I22), MainEffect(2);
+  Free G3,(I23), MainEffect(3);
+  Free G3,(I24), MainEffect(4);
+  Free G3,(I25), MainEffect(1);
+  Free G3,(I25), MainEffect(2);
+  Free G3,(I25), Interaction(1,2);  
+  Free G3,(I26), MainEffect(1);
+  Free G3,(I26), MainEffect(3);
+  Free G3,(I26), Interaction(1,3);
+  Free G3,(I27), MainEffect(1);
+  Free G3,(I27), MainEffect(4);
+  Free G3,(I27), Interaction(1,4);
+  Free G3,(I28), MainEffect(2);
+  Free G3,(I28), MainEffect(4);
+  Free G3,(I28), Interaction(2,4); 
+  Free G3,(I29), MainEffect(2);
+  Free G3,(I29), MainEffect(3);
+  Free G3,(I29), Interaction(2,3);
+  Free G3,(I30), MainEffect(3);
+  Free G3,(I30), MainEffect(4);
+  Free G3,(I30), Interaction(3,4);
+  
+  
+  // Main effects for G4
+  Fix G4,(I1, I2, I3, I4, I5, I6, I7, I8, I9, I10, 
+    I11, I12, I13, I14, I15, I16, I17, I18, I19, I20, 
+    I21, I22, I23, I24, I25, I26, I27, I28, I29, I30),
+  MainEffect; 
+  
+  Free G4,(I1), MainEffect(1);
+  Free G4,(I2), MainEffect(2);
+  Free G4,(I3), MainEffect(3);
+  Free G4,(I4), MainEffect(4);
+  Free G4,(I5), MainEffect(1);
+  Free G4,(I5), MainEffect(2);
+  Free G4,(I5), Interaction(1,2);
+  Free G4,(I6), MainEffect(1);
+  Free G4,(I6), MainEffect(3);
+  Free G4,(I6), Interaction(1,3);
+  Free G4,(I7), MainEffect(1);
+  Free G4,(I7), MainEffect(4);
+  Free G4,(I7), Interaction(1,4);
+  Free G4,(I8), MainEffect(2);
+  Free G4,(I8), MainEffect(4);
+  Free G4,(I8), Interaction(2,4);
+  Free G4,(I9), MainEffect(2);
+  Free G4,(I9), MainEffect(3);
+  Free G4,(I9), Interaction(2,3);
+  Free G4,(I10), MainEffect(3);
+  Free G4,(I10), MainEffect(4);
+  Free G4,(I10), Interaction(3,4);
+  Free G4,(I11), MainEffect(1);
+  Free G4,(I12), MainEffect(2);
+  Free G4,(I13), MainEffect(3);
+  Free G4,(I14), MainEffect(4);
+  Free G4,(I15), MainEffect(1);
+  Free G4,(I15), MainEffect(2);
+  Free G4,(I15), Interaction(1,2);  
+  Free G4,(I16), MainEffect(1);
+  Free G4,(I16), MainEffect(3);
+  Free G4,(I16), Interaction(1,3);
+  Free G4,(I17), MainEffect(1);
+  Free G4,(I17), MainEffect(4);
+  Free G4,(I17), Interaction(1,4);
+  Free G4,(I18), MainEffect(2);
+  Free G4,(I18), MainEffect(4);
+  Free G4,(I18), Interaction(2,4); 
+  Free G4,(I19), MainEffect(2);
+  Free G4,(I19), MainEffect(3);
+  Free G4,(I19), Interaction(2,3);
+  Free G4,(I20), MainEffect(3);
+  Free G4,(I20), MainEffect(4);
+  Free G4,(I20), Interaction(3,4);
+  Free G4,(I21), MainEffect(1);
+  Free G4,(I22), MainEffect(2);
+  Free G4,(I23), MainEffect(3);
+  Free G4,(I24), MainEffect(4);
+  Free G4,(I25), MainEffect(1);
+  Free G4,(I25), MainEffect(2);
+  Free G4,(I25), Interaction(1,2);  
+  Free G4,(I26), MainEffect(1);
+  Free G4,(I26), MainEffect(3);
+  Free G4,(I26), Interaction(1,3);
+  Free G4,(I27), MainEffect(1);
+  Free G4,(I27), MainEffect(4);
+  Free G4,(I27), Interaction(1,4);
+  Free G4,(I28), MainEffect(2);
+  Free G4,(I28), MainEffect(4);
+  Free G4,(I28), Interaction(2,4); 
+  Free G4,(I29), MainEffect(2);
+  Free G4,(I29), MainEffect(3);
+  Free G4,(I29), Interaction(2,3);
+  Free G4,(I30), MainEffect(3);
+  Free G4,(I30), MainEffect(4);
+  Free G4,(I30), Interaction(3,4);
+
+
+ // Main effects for G5
+  Fix G5,(I1, I2, I3, I4, I5, I6, I7, I8, I9, I10, 
+    I11, I12, I13, I14, I15, I16, I17, I18, I19, I20, 
+    I21, I22, I23, I24, I25, I26, I27, I28, I29, I30),
+  MainEffect; 
+  
+  Free G5,(I1), MainEffect(1);
+  Free G5,(I2), MainEffect(2);
+  Free G5,(I3), MainEffect(3);
+  Free G5,(I4), MainEffect(4);
+  Free G5,(I5), MainEffect(1);
+  Free G5,(I5), MainEffect(2);
+  Free G5,(I5), Interaction(1,2);
+  Free G5,(I6), MainEffect(1);
+  Free G5,(I6), MainEffect(3);
+  Free G5,(I6), Interaction(1,3);
+  Free G5,(I7), MainEffect(1);
+  Free G5,(I7), MainEffect(4);
+  Free G5,(I7), Interaction(1,4);
+  Free G5,(I8), MainEffect(2);
+  Free G5,(I8), MainEffect(4);
+  Free G5,(I8), Interaction(2,4);
+  Free G5,(I9), MainEffect(2);
+  Free G5,(I9), MainEffect(3);
+  Free G5,(I9), Interaction(2,3);
+  Free G5,(I10), MainEffect(3);
+  Free G5,(I10), MainEffect(4);
+  Free G5,(I10), Interaction(3,4);
+  Free G5,(I11), MainEffect(1);
+  Free G5,(I12), MainEffect(2);
+  Free G5,(I13), MainEffect(3);
+  Free G5,(I14), MainEffect(4);
+  Free G5,(I15), MainEffect(1);
+  Free G5,(I15), MainEffect(2);
+  Free G5,(I15), Interaction(1,2);  
+  Free G5,(I16), MainEffect(1);
+  Free G5,(I16), MainEffect(3);
+  Free G5,(I16), Interaction(1,3);
+  Free G5,(I17), MainEffect(1);
+  Free G5,(I17), MainEffect(4);
+  Free G5,(I17), Interaction(1,4);
+  Free G5,(I18), MainEffect(2);
+  Free G5,(I18), MainEffect(4);
+  Free G5,(I18), Interaction(2,4); 
+  Free G5,(I19), MainEffect(2);
+  Free G5,(I19), MainEffect(3);
+  Free G5,(I19), Interaction(2,3);
+  Free G5,(I20), MainEffect(3);
+  Free G5,(I20), MainEffect(4);
+  Free G5,(I20), Interaction(3,4);
+  Free G5,(I21), MainEffect(1);
+  Free G5,(I22), MainEffect(2);
+  Free G5,(I23), MainEffect(3);
+  Free G5,(I24), MainEffect(4);
+  Free G5,(I25), MainEffect(1);
+  Free G5,(I25), MainEffect(2);
+  Free G5,(I25), Interaction(1,2);  
+  Free G5,(I26), MainEffect(1);
+  Free G5,(I26), MainEffect(3);
+  Free G5,(I26), Interaction(1,3);
+  Free G5,(I27), MainEffect(1);
+  Free G5,(I27), MainEffect(4);
+  Free G5,(I27), Interaction(1,4);
+  Free G5,(I28), MainEffect(2);
+  Free G5,(I28), MainEffect(4);
+  Free G5,(I28), Interaction(2,4); 
+  Free G5,(I29), MainEffect(2);
+  Free G5,(I29), MainEffect(3);
+  Free G5,(I29), Interaction(2,3);
+  Free G5,(I30), MainEffect(3);
+  Free G5,(I30), MainEffect(4);
+  Free G5,(I30), Interaction(3,4);
+
+ // Linking attributes between G3 and G4
+  
+
+
+ // Linking attributes between G4 and G5
+        
+        
+ 
